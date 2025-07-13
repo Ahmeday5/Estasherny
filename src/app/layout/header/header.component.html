@@ -1,0 +1,17 @@
+<div class="container mt-3 mb-3">
+  <header class="header">
+    <div class="row d-flex" dir="ltr">
+      <div class="col-md-1 col-sm-5 logout">
+        <img [src]="userImage" alt="User Image" style="max-width: 150px;"
+          onerror="this.src='/assets/img/header/logo.png';">
+        <!-- الصورة بتستخدم src ديناميكي من userImage
+        onerror بيحل مشكلة لو الصورة مش موجودة أو فشل تحميلها -->
+      </div>
+      <div class="col-md-2 col-sm-5 mt-4">
+        <h6>{{ username }}</h6>
+        <!-- العلامة h1 بتعرض الاسم المخزن في المتغير username -->
+        <!-- عرض الصورة الشخصية أو الصورة الافتراضية -->
+      </div>
+    </div>
+  </header>
+</div>

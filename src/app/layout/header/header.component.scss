@@ -1,0 +1,13 @@
+.header {
+  height: 10vh;
+  font-family: var(--font-latin); /* الخط العربي */
+  font-weight: 600; /* وزن الخط */
+  line-height: 100%; /* ارتفاع السطر */
+  text-align: left; /* محاذاة النص لليمين */
+  padding: 10px 0;
+}
+
+.header h6 {
+  color: var(--second-color);
+  font-weight: bold;
+}

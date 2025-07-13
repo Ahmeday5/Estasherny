@@ -1,0 +1,67 @@
+<div class="container mb-2">
+  <div class="row">
+    <div class="col-md-12">
+
+      <!---------------------Search-------------------->
+
+      <div class="search-container">
+        <input #searchInput type="text" class="form-control" placeholder="ابحث عن طبيب  ..."
+               aria-label="Search" (input)="onSearch(searchInput.value)"> <!-- استخدام الـ Reference Variable -->
+        <i class="fas fa-search search-icon"></i>
+      </div>
+
+      <!---------------------filter-------------------->
+      <div class="row-cols-1 row-cols-md-10 row-cols-lg-11 mt-4">
+        <!-- زرار جديد لـ "كل التخصصات" -->
+        <button class="btn-filter mb-1" (click)="onFilterClick(null)">كل التخصصات</button>
+        @for (speciality of specialities; track speciality.id) {
+        <button class="btn-filter mb-1" (click)="onFilterClick(speciality.name)">{{ speciality.name }}</button>
+        }
+      </div>
+
+      <!---------------------cards-------------------->
+      <div class="cardParent mt-4">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-3">
+          @if (loading) {
+          <div class="col-12 text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+          } @else if (noDoctorsMessage) {
+          <div class="col-12 text-center">
+            <p class="text-danger">{{ noDoctorsMessage }}</p>
+          </div>
+          } @else {
+          @for (doctor of displayedDoctors; track doctor.id) {
+          <div class="col">
+            <div class="card" style="width: 100%;">
+              <img [src]="doctor.doctorImage || '/assets/img/dashboard/bg-photo.png'" class="card-img-top" alt="...">
+              <div class="card-body">
+                <div class="top-title d-flex justify-content-between align-content-center align-items-center">
+                  <h5 class="card-titleright">{{ doctor.name || 'د. محمد فتحي' }}</h5>
+                  <h5 class="card-titleleft">{{ doctor.specialization || 'جراحة عامة' }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+          }
+        </div>
+      </div>
+
+      <!---------------------Pagination-------------------->
+      <div class="All-Padination mt-2" dir="ltr">
+        <nav>
+          <ul class="pagination justify-content-center">
+            @for (page of pages; track page) {
+            <li class="page-item" [ngClass]="{'active': currentPage === page}">
+              <button class="page-link" (click)="onPageChange(page)">{{ page }}</button>
+            </li>
+            }
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

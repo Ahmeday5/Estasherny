@@ -1,0 +1,119 @@
+<!-- زر الـ Toggle لفتح/قفل الـ Sidebar في الشاشات الصغيرة -->
+<button class="btn btn-primary toggle-btn" (click)="toggleSidebar()">☰</button>
+<!-- زر Toggle بيستخدم كلاس Bootstrap btn-primary
+(click)="toggleSidebar()" بيستدعي الدالة toggleSidebar لتغيير حالة الـ Sidebar
+الرمز ☰ بيمثل أيقونة القائمة في الشاشات الصغيرة. -->
+
+<!-- حاوية الـ Sidebar -->
+<aside class="sidebar" [ngClass]="{'sidebar-open': isSidebarOpen}" dir="rtl">
+  <!-- aside بيمثل القسم الجانبي، و[ngClass] بيضيف كلاس sidebar-open لو isSidebarOpen true
+  dir="rtl" بيحدد اتجاه النص من اليمين لليسار. -->
+  <nav class="sidebar-nav" id="sidebar">
+    <!-- nav بيمثل قائمة التنقل الجانبية، وid="sidebar" بيخلّي نحدده في CSS أو JS. -->
+
+    <!-- رأس الـ Sidebar -->
+    <div class="sidebar-header">
+      <!-- قسم رأس الـ Sidebar اللي فيه الشعار والاسم. -->
+      <div class="logo" id="sidebarLogo">
+        <!-- div بيمثل الشعار، وid="sidebarLogo" بيخلّي نحدده لو حابين. -->
+        <a routerLink="/dashboard">
+          <!-- رابط للرئيسية باستخدام routerLink. -->
+          <img src="/assets/img/logo-sidbar.png" alt="Logo" loading="lazy" />
+          <!-- صورة الشعار، loading="lazy" بيؤخر التحميل لحين الحاجة. -->
+        </a>
+        <h4>شركة الدلتا لتجارة الجملة</h4>
+        <!-- العنوان اللي بيمثل اسم الشركة. -->
+      </div>
+    </div>
+
+    <!-- قائمة التنقل -->
+    <div>
+      <!-- حاوية القائمة الداخلية. -->
+      <ul class="nav-menu">
+        <!-- ul بيمثل القائمة العلوية، وclass="nav-menu" بيحدد الأسلوب في CSS. -->
+        <!-- تكرار عناصر القائمة الرئيسية باستخدام @for -->
+        @for (item of menuItems; track $index) {
+        <!-- @for بيستخدم بدل *ngFor في Angular 18، وtrack $index بيضمن تتبع فريد
+        $index بيمثل الرقم الترتيبي لكل عنصر. -->
+        <li class="nav-item" [ngClass]="{'has-submenu': item.submenu, 'open': item.isOpen}">
+          <!-- li بيمثل كل عنصر في القائمة، و[ngClass] بيضيف has-submenu لو فيه submenu
+          وopen لو item.isOpen true. -->
+          @if (isLogoutItem(item)) {
+          <!-- @if بيشتغل لو العنصر هو "تسجيل الخروج" باستخدام isLogoutItem. -->
+          <a (click)="logout()" class="nav-link">
+            <!-- a بيمثل الزر، (click)="logout()" بيستدعي دالة logout لما يتم الضغط
+            class="nav-link" بيحدد الأسلوب. -->
+            <div style="cursor: pointer;" class="icon-text">
+              <!-- div بيحتوي على الصورة والنص. -->
+              <i class="fa-solid fa-sign-out-alt"></i>
+              <!-- [src] بيربط الصورة ديناميكيًا
+              alt="Logout" بيوضح وصف للصورة لو مش بتتحمل. -->
+              <span>{{ item.label }}</span>
+              <!-- span بيعرض اسم العنصر (تسجيل الخروج). -->
+            </div>
+          </a>
+          } @else {
+          <!-- @else بيشتغل لو العنصر مش "تسجيل الخروج". -->
+          @if (item.submenu) {
+          <!-- @if بيشتغل لو فيه submenu (زي "دكتور" و"المستخدمين"). -->
+          <a href="#" class="nav-link" (click)="toggleSubmenu($index); $event.preventDefault()">
+            <!-- a بيكون رابط فارغ، (click) بيستدعي toggleSubmenu ويمنع التنقل
+            class="nav-link" بيحدد الأسلوب. -->
+            <div class="icon-text">
+
+              <!-- div بيحتوي على الصورة والنص. -->
+              <i [class]="item.icons"></i>
+              <!-- [src] بيغير الصورة بناءً على نشاط أول عنصر فرعي
+              alt بيمثل وصف الصورة. -->
+              <span>{{ item.label }}</span>
+              <!-- span بيعرض اسم العنصر (مثل دكتور). -->
+            </div>
+          </a>
+          <!-- عرض القائمة الفرعية -->
+          <ul class="submenu" [ngClass]="{'open': item.isOpen}">
+            <!-- ul بيمثل القائمة الفرعية، [ngClass] بيضيف open لو item.isOpen true. -->
+            @for (subItem of item.submenu; track $index) {
+            <!-- @for بيستخدم لتكرار العناصر الفرعية، track $index بيضمن تتبع فريد. -->
+            <li class="nav-item">
+              <!-- li بيمثل كل عنصر فرعي. -->
+              <a [routerLink]="subItem.path" class="nav-link" routerLinkActive="nav-active"
+                [routerLinkActiveOptions]="{exact: true}">
+                <!-- [routerLink] بيربط المسار الفرعي، routerLinkActive بيضيف nav-active لو نشط
+                [routerLinkActiveOptions] بيحدد المطابقة الدقيقة. -->
+                <div class="icon-text">
+                  <!-- div بيحتوي على الأيقونة والنص. -->
+                  <i [class]="subItem.icon"></i>
+                  <!-- i بيمثل الأيقونة، [class] بيربط الكلاس ديناميكيًا. -->
+                  <span>{{ subItem.key }}</span>
+                  <!-- span بيعرض اسم العنصر الفرعي (مثل جميع الأطباء). -->
+                </div>
+              </a>
+            </li>
+            }
+          </ul>
+          } @else {
+          <!-- @else بيشتغل لو مفيش submenu (زي "التقارير" و"إضافة خصم"). -->
+          @if (item.path) {
+          <!-- @if بيشتغل لو item.path موجود (مش null). -->
+          <a [routerLink]="item.path" class="nav-link" routerLinkActive="nav-active"
+            [routerLinkActiveOptions]="{exact: false}">
+            <!-- [routerLink] بيربط المسار ديناميكيًا، routerLinkActive بيضيف nav-active لو نشط
+            [routerLinkActiveOptions] بيحدد إن المطابقة مش لازم تكون دقيقة. -->
+            <div class="icon-text">
+              <!-- div بيحتوي على الصورة والنص. -->
+              <i [class]="item.icons"></i>
+              <!-- [src] بيغير الصورة بناءً على حالة النشاط باستخدام isActive
+              alt بيمثل وصف الصورة. -->
+              <span>{{ item.label }}</span>
+              <!-- span بيعرض اسم العنصر (مثل التقارير). -->
+            </div>
+          </a>
+          }
+          }
+          }
+        </li>
+        }
+      </ul>
+    </div>
+  </nav>
+</aside>

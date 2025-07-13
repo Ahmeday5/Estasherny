@@ -1,0 +1,134 @@
+/****************************bg***************************/
+
+.bg {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  padding: 0 15px;
+  width: 80%;
+}
+
+.bg .imgs {
+  text-align: left;
+}
+
+.bg .content {
+  color: var(--thrid-color);
+}
+
+.bg .content h5 {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 23px;
+  line-height: 53.5px;
+}
+
+/*********************cards****************/
+.cardParent .card-body {
+  padding: 10px;
+}
+
+.cards {
+  padding: 0 30px;
+}
+
+.card {
+  border: 1px solid var(--second-color);
+  background: var(--third-color);
+  border-radius: 12px;
+}
+
+.card .icon-container {
+  margin-left: 20px; // مسافة بسيطة بين النص والأيقونة
+}
+
+.card .card-body .icon-container img {
+  width: 35px;
+}
+
+.card .card-body .text-content {
+  flex: 1; // يخلي النص ياخد المساحة المتاحة
+  color: var(--second-color);
+}
+
+.card .card-title,
+.card .card-textleft {
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0.5px;
+}
+
+.card .card-textleft {
+  margin: 0 15px 0 0;
+}
+
+.card .card-textright {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--main-color);
+}
+
+/************  table *****************/
+
+.CustomcardParent {
+  background: #eae1e1 !important;
+}
+
+.custom-table {
+  overflow-x: auto;
+}
+
+.custom-table-design {
+  border-collapse: separate;
+  /* لفصل الصفوف */
+  border-spacing: 0 3px;
+  /* مسافة بين الصفوف */
+  margin: 0;
+}
+
+.custom-table-design thead {
+  border: none;
+}
+
+.custom-table-design thead th {
+  background: var(--main-color) !important;
+  color: var(--second-color);
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 100%;
+  padding: 15px !important;
+  border-right: 2px solid #ffa500;
+}
+
+.custom-table-design tbody tr {
+  background: var(--second-color);
+  border: 1px solid transparent;
+  border-radius: 12px !important;
+}
+
+.custom-table-design td {
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--main-color);
+  padding: 10px !important;
+  border-right: 2px solid #ffa500; // خط برتقالي بين العواميد في الجسم
+}
+
+.custom-table-design .detailsCustomerbtn {
+  border: 1px solid var(--third-color);
+}
+
+.btn-edit {
+  width: 31px;
+  height: 31px;
+}
+
+@media (max-width: 992px) {
+  .bg {
+    padding: 15px;
+  }
+}
