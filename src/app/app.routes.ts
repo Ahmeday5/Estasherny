@@ -91,7 +91,7 @@ export const routes: Routes = [
     // breadcrumb بيحدد الاسم اللي هيظهر في مسار التنقل في الهيدر.
   },
   {
-    path: 'allorders',
+    path: 'adddoctor',
     component: addDoctorComponent,
     canActivate: [canActivate], // حماية المسار
     data: { breadcrumb: 'الطلبيات' },

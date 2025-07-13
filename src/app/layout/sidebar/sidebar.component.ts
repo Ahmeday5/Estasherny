@@ -52,8 +52,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           icon: 'fa-solid fa-briefcase-medical',
         },
         {
-          key: 'إنشاء وتعديل حسابات الأطباء',
-          path: '/order',
+          key: 'إنشاء حسابات الأطباء',
+          path: '/adddoctor',
           icon: 'fa-solid fa-house-medical',
         },
       ],
